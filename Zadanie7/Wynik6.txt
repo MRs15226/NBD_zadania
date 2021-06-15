@@ -1,0 +1,1 @@
+curl -XDELETE http://192.168.99.100:8098/buckets/s15226/keys/Nowak -i

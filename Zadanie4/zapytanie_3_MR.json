@@ -1,0 +1,19 @@
+db.people.mapReduce( 
+  function(){ 
+      emit( this.job,{"count":1} );
+  },
+  function(key, values) { 
+      rv = { "count": 0}; 
+      values.forEach(function(value) {
+          rv.count += value.count;
+      });
+      return rv;
+  },  
+  { 
+      "out": "out_3_MR"
+   }
+)
+
+db.out_3_MR.deleteMany({"value.count":{ $gt:1 }})
+
+printjson(db.out_3_MR.find({},{_id:1}).toArray())

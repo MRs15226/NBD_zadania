@@ -1,0 +1,17 @@
+db.people.mapReduce( 
+  function(){ 
+      for (var idx = 0; idx < this.credit.length; idx++) {
+       var key = this.credit[idx].currency;
+       var value =this.credit[idx].balance;
+       emit(key, value);
+	  }
+  },
+  function(key, values) { 
+      return Array.sum(values);
+  },  
+  { 
+      "out": "out_2_MR"
+  }
+)
+
+printjson(db.out_2_MR.find().toArray())

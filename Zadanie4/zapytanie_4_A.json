@@ -1,0 +1,12 @@
+printjson(db.people.aggregate(
+    { $project: { nationality:1,bmi: { $divide: [ "$weight", {$pow:["$height",2]} ] } } 
+	},
+	{$group: {
+      _id: "$nationality",
+      avg_bmi: { $avg :"$bmi" },
+	  min_bmi: { $min :"$bmi" },
+	  max_bmi: { $max :"$bmi" }
+    }},
+	{ $sort : { _id : 1 } }
+).toArray()
+)

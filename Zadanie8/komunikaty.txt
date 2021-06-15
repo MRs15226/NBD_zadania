@@ -1,0 +1,19 @@
+[main] INFO com.basho.riak.client.core.RiakNode - RiakNode started; 192.168.99.100:8087
+[main] INFO com.basho.riak.client.core.RiakCluster - RiakCluster is starting.
+[main] INFO com.basho.riak.client.core.util.DefaultCharset - No desired charset found in system properties, the default charset 'UTF-8' will be used
+[main] INFO com.basho.riak.client.core.util.DefaultCharset - Initializing client charset to: UTF-8
+Wstawienie rekordu
+Wyszukanie rekordu
+Student{name='Maciej', surname='Rogowski', indexNumber='s15226'}
+Aktulizacja rekordu
+Ponowne wyszukanie rekordu - po aktualizacji
+Student{name='Daniel', surname='Rogowski', indexNumber='s15226'}
+Usuniêcie rekordu
+Wyszukanie rekordu
+null
+[main] INFO com.basho.riak.client.core.RiakCluster - RiakCluster is shutting down.
+[pool-1-thread-2] INFO com.basho.riak.client.core.RiakCluster - All operations have completed
+[pool-1-thread-2] INFO com.basho.riak.client.core.RiakNode - RiakNode shutting down; 192.168.99.100:8087
+[pool-1-thread-1] INFO com.basho.riak.client.core.RiakCluster - Retrier shutting down.
+[pool-1-thread-2] INFO com.basho.riak.client.core.DefaultNodeManager - NodeManager removed node due to it shutting down; 192.168.99.100:8087
+[pool-1-thread-1] INFO com.basho.riak.client.core.RiakCluster - RiakCluster has shut down

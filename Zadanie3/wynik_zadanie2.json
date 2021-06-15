@@ -1,0 +1,56 @@
+MongoDB shell version v4.0.22
+connecting to: mongodb://127.0.0.1:27017/nbd?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("22d5735b-97e2-45de-8ba4-38e993422bcc") }
+MongoDB server version: 4.0.22
+2021-05-16T12:40:04.525+0200 E QUERY    [js] SyntaxError: missing ) after argument list @zadanie2.json:1:33
+failed to load: zadanie2.json
+MongoDB shell version v4.0.22
+connecting to: mongodb://127.0.0.1:27017/nbd?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("07d3b4ce-447c-40a0-9c7e-2e899a1e7ca0") }
+MongoDB server version: 4.0.22
+{
+	"_id" : ObjectId("60a0eee991d29404177a0f01"),
+	"sex" : "Female",
+	"first_name" : "Kathryn",
+	"last_name" : "Hanson",
+	"job" : "Staff Scientist",
+	"email" : "khanson4@addtoany.com",
+	"location" : {
+		"city" : "Marks",
+		"address" : {
+			"streetname" : "Emmet",
+			"streetnumber" : "115"
+		}
+	},
+	"description" : "lobortis sapien sapien non mi integer ac neque duis bibendum morbi",
+	"height" : "174.93",
+	"weight" : "66.37",
+	"birth_date" : "1949-05-30T21:09:16Z",
+	"nationality" : "Russia",
+	"credit" : [
+		{
+			"type" : "maestro",
+			"number" : "3579903324857689",
+			"currency" : "SEK",
+			"balance" : "4818.97"
+		},
+		{
+			"type" : "jcb",
+			"number" : "3555428247044700",
+			"currency" : "BRL",
+			"balance" : "3956.68"
+		},
+		{
+			"type" : "maestro",
+			"number" : "3543742811477335",
+			"currency" : "SEK",
+			"balance" : "4993.25"
+		},
+		{
+			"type" : "mastercard",
+			"number" : "374288616031802",
+			"currency" : "MMK",
+			"balance" : "4818.37"
+		}
+	]
+}

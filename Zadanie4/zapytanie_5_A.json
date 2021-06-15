@@ -1,0 +1,17 @@
+printjson(db.people.aggregate(
+    { $project : {
+		"nationality":1,
+		"sex":1,
+        "credit.currency":1,
+		"credit.balance":1
+	}},
+	{ $unwind : "$credit" },
+	{ $match: { nationality:"Poland",sex:"Female" } },
+	{$group: {
+      _id: "$credit.currency",
+      avg_balance: { $avg :"$credit.balance" },
+	  sum_balance: { $max :"$credit.balance" }
+    }},
+	{ $sort : { _id : 1 } }
+).toArray()
+)

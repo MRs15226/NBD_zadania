@@ -1,0 +1,38 @@
+db.people.mapReduce( 
+  function(){ 
+  
+	  var key = this.nationality;
+	  var calc_bmi = this.weight/(this.height*this.height);
+      var value ={bmi: calc_bmi,max_bmi:calc_bmi,min_bmi:calc_bmi,"count":1};
+      emit(key, value);
+  },
+  function(key, values) { 
+      rv = { "bmi":0,"max_bmi":0,"min_bmi":100,"count":0}; 
+      values.forEach(function(value) {
+
+		  if(value.bmi>rv.max_bmi)
+			rv.max_bmi=value.bmi;
+			
+		  if(value.bmi<rv.min_bmi)
+			rv.min_bmi=value.bmi;
+		  
+		  rv.bmi += value.bmi;
+          rv.count += value.count;
+		  
+      });
+	  
+      return rv;
+  },  
+  { 
+	  "finalize": function(key, reduceVal) { 
+		  summary = { "avg_bmi" : 0, "max_bmi" : 0,"min_bmi":0}; 
+          summary.avg_bmi = reduceVal.bmi/reduceVal.count;
+		  summary.max_bmi = reduceVal.max_bmi;
+		  summary.min_bmi = reduceVal.min_bmi;
+          return summary;  
+      },
+      "out": "out_4_MR"
+   }
+)
+
+printjson(db.out_4_MR.find().toArray())

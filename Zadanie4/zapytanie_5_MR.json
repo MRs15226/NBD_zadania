@@ -1,0 +1,37 @@
+db.people.mapReduce( 
+  function(){ 
+	  for (var idx = 0; idx < this.credit.length; idx++) {
+       var key = this.credit[idx].currency;
+       var value = { count: 1, balance: this.credit[idx].balance,max_balance:this.credit[idx].balance};
+       emit(key, value);
+	  }
+  },
+  function(key, values) { 
+      rv = { "balance":0,"max_balance":0,"count":0}; 
+      values.forEach(function(value) {
+
+		  if(value.balance>rv.max_balance){
+			rv.max_balance=value.balance;
+		  }
+		  
+		  rv.balance += value.balance;
+		  rv.count	 += value.count;
+		  
+      });
+
+      return rv;
+  },  
+  { 
+      "out": "out_5_MR",
+	  "finalize": function(key, reduceVal) { 
+		  summary = { "avg_balance" : 0, "max_balance" : 0,"count":0}; 
+          summary.avg_balance = reduceVal.balance/reduceVal.count;
+		  summary.max_balance = reduceVal.max_balance;
+		  summary.count = reduceVal.count;
+          return summary;  
+      },
+	  "query": { nationality:"Poland",sex:"Female"}
+   }
+)
+
+printjson(db.out_5_MR.find().toArray())

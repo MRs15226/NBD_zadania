@@ -1,0 +1,25 @@
+db.people.mapReduce( 
+  function(){ 
+      emit( this.sex, { weight: this.weight, height: this.height,"count":1} );
+  },
+  function(key, values) { 
+      rv = { "count": 0,"weight":0,"height":0}; 
+      values.forEach(function(value) {
+          rv.count += value.count;
+		  rv.weight += value.weight;
+          rv.height += value.height;
+      });
+      return rv;
+  },  
+  { 
+      "out": "out_1_MR" ,
+      "finalize": function(key, reduceVal) { 
+		  summary = { "avgWeight" : 0, "avgHeight" : 0}; 
+          summary.avgWeight = reduceVal.weight / reduceVal.count; 
+		  summary.avgHeight = reduceVal.height / reduceVal.count; 
+          return summary;  
+      } 
+   }
+)
+
+printjson(db.out_1_MR.find().toArray())
